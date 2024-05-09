@@ -1,3 +1,5 @@
+package com.chawza.dashboard.commonMain
+
 val LANG = arrayOf("en", "id")
 
 val DAYS = mapOf(

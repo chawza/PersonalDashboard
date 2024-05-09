@@ -1,7 +1,3 @@
-package views
-
-import DAYS
-import MONTHS
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,6 +11,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.chawza.dashboard.commonMain.DAYS
+import com.chawza.dashboard.commonMain.MONTHS
 import org.jetbrains.compose.ui.tooling.preview.Preview
 import java.util.Calendar
 import java.util.TimeZone
@@ -28,7 +26,7 @@ fun MainDashboardView() {
         // Main Content
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             Column {
-                Text("Hello,", style = MaterialTheme.typography.titleSmall)
+                Text("Hello,", style = MaterialTheme.typography.headlineSmall)
                 Text(userName, style = MaterialTheme.typography.headlineLarge)
             }
         }
