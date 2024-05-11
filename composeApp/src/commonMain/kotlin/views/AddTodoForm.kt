@@ -1,6 +1,5 @@
 package views
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import components.DateAndTimeDialog
+import components.DateAndTimeField
 import model.TodoItemModel
 import java.time.LocalDateTime
 
@@ -24,6 +24,10 @@ import java.time.LocalDateTime
 fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
     var description by remember { mutableStateOf("") }
     var isDone by remember { mutableStateOf(false) }
+    var scheduleTime by remember { mutableStateOf(LocalDateTime.now()) }
+
+    var showScheduleTimeDialog by remember { mutableStateOf(false) }
+
     Column (
         modifier = Modifier.fillMaxSize()
     ) {
@@ -38,6 +42,19 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
         ) {
             Checkbox(isDone, onCheckedChange = { isDone = it })
             Text("Is Done")
+        }
+        DateAndTimeField(scheduleTime) {
+            showScheduleTimeDialog = true
+        }
+
+        if (showScheduleTimeDialog) {
+            DateAndTimeDialog(
+                dismissRequest = {
+                    showScheduleTimeDialog = false
+                },
+                value = scheduleTime,
+                onChange = { scheduleTime = it }
+            )
         }
         Button(
             onClick = {

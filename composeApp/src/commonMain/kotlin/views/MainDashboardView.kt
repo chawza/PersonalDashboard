@@ -38,7 +38,7 @@ fun MainDashboardView(
                 detectDragGestures { change, dragAmount ->
                     change.consume()
                     val swipeLeft = dragAmount.x < 0
-                    val enoughSwipe = dragAmount.x.absoluteValue > 100f
+                    val enoughSwipe = dragAmount.x.absoluteValue > 30.dp.toPx()
 
                     if (enoughSwipe) {
                         if (swipeLeft) {
