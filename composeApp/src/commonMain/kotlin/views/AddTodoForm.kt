@@ -1,13 +1,16 @@
 package views
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material.Button
-import androidx.compose.material.Checkbox
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -15,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import components.DateAndTimeDialog
 import components.DateAndTimeField
 import model.TodoItemModel
@@ -29,8 +33,12 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
     var showScheduleTimeDialog by remember { mutableStateOf(false) }
 
     Column (
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .background(MaterialTheme.colorScheme.background)
+            .padding(20.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
+        Text("Add Todo", style = MaterialTheme.typography.headlineLarge)
         OutlinedTextField(
             description,
             onValueChange = { description = it},
@@ -75,7 +83,8 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
                 )
                 description = ""
                 isDone = false
-            }
+            },
+            modifier = Modifier.align(Alignment.End)
         ) {
             Text("Add")
         }
