@@ -1,7 +1,10 @@
+package views
+
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,7 +21,9 @@ import java.util.Calendar
 import java.util.TimeZone
 
 @Composable
-fun MainDashboardView() {
+fun MainDashboardView(
+    navigateToTodoList: () -> Unit
+) {
     val lang = "en"
     val userName = "Nabeel"
     
@@ -45,6 +50,16 @@ fun MainDashboardView() {
         }
         // Top Right:
         // Bottom Right:
+        Box(
+            modifier = Modifier.fillMaxSize(),
+            contentAlignment = Alignment.BottomEnd
+        ){
+            Button(
+                onClick = navigateToTodoList
+            ){
+                Text("Todos")
+            }
+        }
         // Bottom Left:
     }
 }
@@ -53,6 +68,6 @@ fun MainDashboardView() {
 @Composable
 fun DashboardPreview() {
     MaterialTheme {
-        MainDashboardView()
+        MainDashboardView({ })
     }
 }
