@@ -43,9 +43,12 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
             Checkbox(isDone, onCheckedChange = { isDone = it })
             Text("Is Done")
         }
-        DateAndTimeField(scheduleTime) {
-            showScheduleTimeDialog = true
-        }
+        DateAndTimeField(
+            value = scheduleTime,
+            onClick = {
+                showScheduleTimeDialog = true
+            }
+        )
 
         if (showScheduleTimeDialog) {
             DateAndTimeDialog(
@@ -58,6 +61,10 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
         }
         Button(
             onClick = {
+                if (
+                    description.isEmpty()
+                )
+                    return@Button
                 onAdd(
                     TodoItemModel(
                         description,

@@ -1,5 +1,6 @@
 package components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +24,8 @@ import androidx.compose.material3.TimePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import java.time.Instant
@@ -46,17 +49,24 @@ fun DateAndTimeField(
 
     Card(
         shape = RoundedCornerShape(4.dp),
-        modifier = modifier
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
     ) {
         Row(
             modifier = Modifier.padding(10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
+            val style = MaterialTheme.typography.bodyMedium.run {
+                return@run this.copy(
+                    lineHeight = TextUnit(this.lineHeight.value + 10f, TextUnitType.Sp),
+                )
+            }
             Text(
                 text = date.format(DateTimeFormatter.ISO_DATE),
+                style = style,
             )
             Text(
                 text = time.format(DateTimeFormatter.ofPattern("H:m:s")),
+                style = style,
             )
         }
     }

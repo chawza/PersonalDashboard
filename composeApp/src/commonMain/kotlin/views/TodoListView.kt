@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import model.TodoItemModel
 import viewmodel.TodoListViewModel
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun ItemCard(
@@ -32,14 +34,30 @@ fun ItemCard(
             modifier = Modifier.fillMaxWidth().padding(12.dp).clickable { onClick() },
         ){
             var title = todo.created.toLocalDate().toString()
-            todo.doneTime?.let {
-                title += " - " + todo.doneTime!!.toLocalDate().toString()
-            }
-            Text(text = title)
-            Text(text = todo.description)
+            Text(text = title, style = MaterialTheme.typography.bodySmall)
+
+            Text(text = todo.description, style = MaterialTheme.typography.bodyLarge)
+
             if (todo.done) {
-                Text(text = "Done", color = Color.Green)
+                Row {
+                    Text(
+                        text = "Done", color = Color.Green,
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Spacer(Modifier.width(6.dp))
+                    Text(
+                        text = todo.doneTime?.format(DateTimeFormatter.ofPattern("w/M/y H:m")) ?: "",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                }
+            } else {
+                Text(
+                    text = "Not Done",
+                    color = Color.LightGray,
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
+
         }
     }
 }
@@ -55,7 +73,9 @@ fun TodoListView() {
     ) {
         Column {
             Text("My Todos", style = MaterialTheme.typography.titleMedium)
-            Row {
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
                 Box(
                     modifier = Modifier.width(400.dp)
                 ) {
