@@ -80,6 +80,9 @@ android {
         debugImplementation(libs.compose.ui.tooling)
     }
 }
+dependencies {
+    implementation(libs.androidx.ui.text.google.fonts)
+}
 
 compose.desktop {
     application {

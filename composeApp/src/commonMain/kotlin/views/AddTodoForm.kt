@@ -78,7 +78,7 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
                         description,
                         LocalDateTime.now(),
                         isDone,
-                        LocalDateTime.now()
+                        if (isDone) LocalDateTime.now() else null
                     )
                 )
                 description = ""
