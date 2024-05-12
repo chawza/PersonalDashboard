@@ -25,7 +25,7 @@ import model.TodoItemModel
 import java.time.LocalDateTime
 
 @Composable
-fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
+fun FormAddTask(onAdd: (TodoItemModel) -> Unit, dismissRequest: () -> Unit) {
     var description by remember { mutableStateOf("") }
     var isDone by remember { mutableStateOf(false) }
     var scheduleTime by remember { mutableStateOf(LocalDateTime.now()) }
@@ -83,6 +83,7 @@ fun FormAddTask(onAdd: (TodoItemModel) -> Unit) {
                 )
                 description = ""
                 isDone = false
+                dismissRequest()
             },
             modifier = Modifier.align(Alignment.End)
         ) {
